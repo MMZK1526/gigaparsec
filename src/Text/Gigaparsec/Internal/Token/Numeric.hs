@@ -371,23 +371,35 @@ mkSigned NumericDesc{..} !unsigned !err = IntegerParsers {
         _number = annotate (labelIntegerSignedNumber err Nothing) $
           atomic (sign <*> annotate (labelIntegerNumberEnd err) (number unsigned))
 
-{-type FloatingParsers :: *
-data FloatingParsers = FloatingParsers {}
+type FloatingParsers :: *
+data FloatingParsers = FloatingParsers { 
+  -- | Parse a single real number literal in decimal form (base 10).
+    decimalFloating :: Parsec Rational
+  -- | Parse a single real number literal in hexadecimal form (base 16).
+  , hexadecimalFloating :: Parsec Rational
+  -- | Parse a single real number literal in octal form (base 8).
+  , octalFloating :: Parsec Rational
+  -- | Parse a single real number literal in binary form (base 2).
+  , binaryFloating :: Parsec Rational
+  -- | Parse a single real number literal, 
+  -- which can be in many forms and bases depending on the configuration.
+  , numberFloating :: Parsec Rational
+  }
 
-mkUnsignedFloating :: NumericDesc -> IntegerParsers CanHoldUnsigned -> GenericNumeric -> FloatingParsers
-mkUnsignedFloating NumericDesc{..} nat gen = FloatingParsers {}
+-- mkUnsignedFloating :: NumericDesc -> IntegerParsers CanHoldUnsigned -> GenericNumeric -> ErrorConfig -> FloatingParsers
+-- mkUnsignedFloating NumericDesc{..} nat gen err = FloatingParsers {}
 
-mkSignedFloating :: NumericDesc -> FloatingParsers -> FloatingParsers
-mkSignedFloating NumericDesc{..} unsigned = FloatingParsers {}
+-- mkSignedFloating :: NumericDesc -> FloatingParsers -> FloatingParsers
+-- mkSignedFloating NumericDesc{..} unsigned = FloatingParsers {}
 
-type CombinedParsers :: *
-data CombinedParsers = CombinedParsers {}
+-- type CombinedParsers :: *
+-- data CombinedParsers = CombinedParsers {}
 
-mkUnsignedCombined :: NumericDesc -> IntegerParsers CanHoldUnsigned -> FloatingParsers -> CombinedParsers
-mkUnsignedCombined NumericDesc{..} natural floating = CombinedParsers {}
+-- mkUnsignedCombined :: NumericDesc -> IntegerParsers CanHoldUnsigned -> FloatingParsers -> CombinedParsers
+-- mkUnsignedCombined NumericDesc{..} natural floating = CombinedParsers {}
 
-mkSignedCombined :: NumericDesc -> CombinedParsers -> CombinedParsers
-mkSignedCombined NumericDesc{..} unsigned = CombinedParsers {}-}
+-- mkSignedCombined :: NumericDesc -> CombinedParsers -> CombinedParsers
+-- mkSignedCombined NumericDesc{..} unsigned = CombinedParsers {}
 
 lexemeInteger :: (forall a. Parsec a -> Parsec a) -> IntegerParsers c -> IntegerParsers c
 lexemeInteger lexe IntegerParsers{..} = IntegerParsers {
