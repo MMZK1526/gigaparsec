@@ -66,6 +66,12 @@ module Text.Gigaparsec.Token.Errors (
     labelIntegerHexadecimalEnd, labelIntegerOctalEnd,
     labelIntegerBinaryEnd, labelIntegerNumberEnd,
     filterIntegerOutOfBounds,
+    -- **** Real Number Errors
+    labelRealDecimal, labelRealHexadecimalEnd, labelRealOctalEnd,
+    labelRealBinaryEnd, labelRealNumberEnd,
+    labelRealDot, labelRealExponent, labelRealExponentEnd,
+    preventRealDoubleDroppedZero,
+    PreventDotIsZeroConfig(UnexpectedZeroDot, UnexpectedZeroDotWithReason, ZeroDotReason, ZeroDotFail),
     -- **** Bit-Widths
     {-|
     Some of the numeric errors can take into account the supposed bit-width of the parsed data.
@@ -146,7 +152,7 @@ import Text.Gigaparsec.Internal.Token.Errors (
     LabelWithExplainConfig(LELabelAndReason, LELabel, LEHidden, LEReason, LENotConfigured),
     LabelConfig(LLabel, LHidden, LNotConfigured), ExplainConfig(EReason, ENotConfigured),
     FilterConfig(VSBecause, VSUnexpected, VSUnexpectedBecause, VSBasicFilter, VSSpecializedFilter),
-    PreventDotIsZeroConfig(ZeroDotReason),
+    PreventDotIsZeroConfig(UnexpectedZeroDot, UnexpectedZeroDotWithReason, ZeroDotReason, ZeroDotFail),
     SpecializedFilterConfig(SSpecializedFilter, SBasicFilter),
     VanillaFilterConfig(VBecause, VUnexpected, VUnexpectedBecause, VBasicFilter),
     VerifiedBadChars(BadCharsUnverified, BadCharsFail, BadCharsReason),
