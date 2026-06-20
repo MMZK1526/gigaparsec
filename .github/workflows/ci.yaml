@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Haskell
-        uses: MMZK1526/haskell-ci@main
+        uses: haskell-actions/setup@v2
         with:
           ghc-version: ${{ matrix.ghc }}
           cabal-version: ${{ matrix.cabal }}
@@ -43,7 +43,7 @@ jobs:
           cabal freeze $CONFIG
 
       - name: Check Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cabal/store
@@ -76,7 +76,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Haskell
-        uses: MMZK1526/haskell-ci@main
+        uses: haskell-actions/setup@v2
         with:
           ghc-version: ${{ matrix.ghc }}
           cabal-version: ${{ matrix.cabal }}
@@ -87,7 +87,7 @@ jobs:
           cabal freeze $CONFIG
 
       - name: Check Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cabal/store
